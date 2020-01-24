@@ -94,7 +94,7 @@ EvilCircle.prototype.draw = function () {
     ctx.stroke();
 }
 
-EvilCircle.prototype.checkBounds = function () { // испраить направление право-низ
+EvilCircle.prototype.checkBounds = function () {
     if ((this.x + this.size) >= width) {
         this.x -= this.size;
     }
