@@ -1,5 +1,19 @@
 'use strict';
 
+// timer variables
+let timer;
+let sec = 0;
+let min = 0;
+let hour = 0;
+
+let startBtn = document.getElementById('start');
+let stopBtn = document.getElementById('stop');
+let resetBtn = document.getElementById('reset');
+let timer_element = document.getElementById('timer');
+let playBtn = document.querySelector('.play');
+
+// game variables
+
 const canvas = document.querySelector('canvas');
 const ctx = canvas.getContext('2d');
 const para = document.querySelector('p');
@@ -8,6 +22,62 @@ const width = canvas.width = window.innerWidth;
 const height = canvas.height = window.innerHeight;
 
 let count = 0;
+
+// !!!!!!!!!!!!!!!!TIMER BLOCK!!!!!!!!!!!!!!!!
+
+startBtn.addEventListener('click', function () {
+    timer = setInterval(timerHandler, 1000);
+    resetBtn.disabled = true;
+});
+
+stopBtn.addEventListener('click', function () {
+    timer = clearInterval(timer);
+    resetBtn.disabled = false;
+});
+
+resetBtn.addEventListener('click', function() {
+    timer = clearInterval('timer');
+    resetBtn.disabled = true;
+    sec = 0;
+    min= 0;
+    hour = 0;
+    timer_element.innerHTML = '00 : 00 : 00';
+});
+
+function timerHandler() {
+    sec++;
+    
+    if(sec ==60) {
+        sec = 0;
+        min++;
+    }
+    if (min == 60) {
+        min = 0;
+        hour++;
+    }
+
+    displayTime();
+}
+
+
+function displayTime() {
+    let secBelow = sec;
+    let minBelow = min;
+    let hourBelow = hour;
+
+    if (sec < 10) {
+        secBelow = '0' + sec;
+    }
+    if (min < 10) {
+        minBelow = '0' + min;
+    }
+    if (hour < 10) {
+        hourBelow = '0' + hour;
+    }
+    timer_element.innerHTML = hourBelow + ' : ' + minBelow + ' : ' + secBelow;
+}
+
+//  !!!!!!!!!!!!!MAIN GAME BLOCK!!!!!!!!!!!!!!!
 
 function random(min, max) {
     const num = Math.floor(Math.random() * (max - min)) + min;
@@ -115,13 +185,13 @@ EvilCircle.prototype.checkBounds = function () {
 EvilCircle.prototype.setControls = function () {
     let _this = this;
     window.onkeydown = function (e) {
-        if (e.key === 'a') {
+        if (e.key === 'a' || e.key === 'ф' || e.key === 'ArrowLeft') {
             _this.x -= _this.velX;
-        } else if (e.key === 'd') {
+        } else if (e.key === 'd' || e.key === 'в' || e.key === 'ArrowRight') {
             _this.x += _this.velX;
-        } else if (e.key === 'w') {
+        } else if (e.key === 'w' || e.key === 'ц' || e.key === 'ArrowUp') {
             _this.y -= _this.velY;
-        } else if (e.key === 's') {
+        } else if (e.key === 's' || e.key === 'ы' || e.key === 'ArrowDown') {
             _this.y += _this.velY;
         }
     }
@@ -138,6 +208,10 @@ EvilCircle.prototype.collisionDetect = function () {
                 balls[j].exists = false;
                 count--;
                 para.textContent = 'Balls count: ' + count;
+                if(count === 0) {
+                    timer = clearInterval(timer);
+                    resetBtn.disabled = false;
+                }
             }
         }
     }
@@ -145,7 +219,7 @@ EvilCircle.prototype.collisionDetect = function () {
 
 let balls = [];
 
-while (balls.length < 25) {
+while (balls.length < 2) {
     let size = random(10, 20);
     let ball = new Ball(
         random(0 + size, width - size),
@@ -184,6 +258,6 @@ function loop() {
 
     requestAnimationFrame(loop);
 }
-
-
+playBtn.onclick = function() {
 loop();
+};

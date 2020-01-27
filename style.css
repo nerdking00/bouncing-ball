@@ -10,6 +10,7 @@ html, body {
   body {
     overflow: hidden;
     height: inherit;
+    background-color: #000000;
   }
   
   h1 {
@@ -31,3 +32,22 @@ html, body {
     right: 5px;
     color: #aaa;
   }
+
+  .app {
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    flex-direction: column;
+    position: absolute;
+  }
+
+  .timer {
+    color: #FFF;
+  }
+
+  .play {
+    position: absolute;
+    cursor: pointer;
+  }
+
