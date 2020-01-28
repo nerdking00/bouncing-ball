@@ -34,6 +34,7 @@ html, body {
   }
 
   .app {
+    width: 100vw;
     background-color: black;
     display: flex;
     justify-content: center;
@@ -44,10 +45,25 @@ html, body {
 
   .timer {
     color: #FFF;
+    margin-bottom: 10px;
+  }
+
+  button {
+    cursor: pointer;
+    width: 80px;
+
+    background: linear-gradient(to right, #FF5858, #CC2E5D);
+    color: #FFF;
+    border-radius: 8px;
+    transition: 0.4s;
+  }
+
+  .play:hover {
+    box-shadow: inset 3px 3px rgba(0, 0, 0, 0.2);
   }
 
   .play {
-    position: absolute;
-    cursor: pointer;
+    margin-top: 5px;
+    width: 200px;
   }
 

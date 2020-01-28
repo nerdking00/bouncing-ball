@@ -17,6 +17,7 @@ let playBtn = document.querySelector('.play');
 const canvas = document.querySelector('canvas');
 const ctx = canvas.getContext('2d');
 const para = document.querySelector('p');
+const html = document.querySelector('html');
 
 const width = canvas.width = window.innerWidth;
 const height = canvas.height = window.innerHeight;
@@ -219,7 +220,7 @@ EvilCircle.prototype.collisionDetect = function () {
 
 let balls = [];
 
-while (balls.length < 2) {
+while (balls.length < 10) {
     let size = random(10, 20);
     let ball = new Ball(
         random(0 + size, width - size),
@@ -258,6 +259,8 @@ function loop() {
 
     requestAnimationFrame(loop);
 }
-playBtn.onclick = function() {
-loop();
-};
+playBtn.addEventListener('click', loop);
+/*canvas.onload = function() {
+    timerHandler();
+} */
+
