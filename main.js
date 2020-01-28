@@ -11,6 +11,8 @@ let stopBtn = document.getElementById('stop');
 let resetBtn = document.getElementById('reset');
 let timer_element = document.getElementById('timer');
 let playBtn = document.querySelector('.play');
+const app = document.querySelector('.app')
+
 
 // game variables
 
@@ -112,19 +114,19 @@ Ball.prototype.draw = function () {
 }
 
 Ball.prototype.update = function () {
-    if ((this.x + this.size) >= width) {
+    if ((this.x + this.size) >= width + this.size) {
         this.velX = -(this.velX);
     }
 
-    if ((this.x + this.size) <= 0) {
+    if ((this.x + this.size) <= 0 + this.size) {
         this.velX = -(this.velX);
     }
 
-    if ((this.y + this.size) >= height) {
+    if ((this.y + this.size) >= height + this.size) {
         this.velY = -(this.velY);
     }
 
-    if ((this.y + this.size) <= 0) {
+    if ((this.y + this.size) <= app.offsetHeight + this.size) {
         this.velY = -(this.velY);
     }
 
@@ -166,19 +168,19 @@ EvilCircle.prototype.draw = function () {
 }
 
 EvilCircle.prototype.checkBounds = function () {
-    if ((this.x + this.size) >= width) {
+    if ((this.x + this.size) >= width + this.size) {
         this.x -= this.size;
     }
 
-    if ((this.x + this.size) <= 0) {
+    if ((this.x + this.size) <= 0 + this.size) {
         this.x += this.size;
     }
 
-    if ((this.y + this.size) >= height) {
+    if ((this.y + this.size) >= height + this.size) {
         this.y -= this.size;
     }
 
-    if ((this.y + this.size) <= 0) {
+    if ((this.y + this.size) <= app.offsetHeight + this.size) {
         this.y += this.size;
     }
 }
@@ -260,6 +262,8 @@ function loop() {
     requestAnimationFrame(loop);
 }
 playBtn.addEventListener('click', loop);
+
+
 /*canvas.onload = function() {
     timerHandler();
 } */
