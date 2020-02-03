@@ -1,69 +1,70 @@
-html, body {
-    margin: 0;
-  }
-  
-  html {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    height: 100%;
-  }
-  
-  body {
-    overflow: hidden;
-    height: inherit;
-    background-color: #000000;
-  }
-  
-  h1 {
-    font-size: 2rem;
-    letter-spacing: -1px;
-    position: absolute;
-    margin: 0;
-    top: -4px;
-    right: 5px;
-  
-    color: transparent;
-    text-shadow: 0 0 4px white;
-  }
+html,
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
 
-  p {
-    position: absolute;
-    margin: 0;
-    top: 35px;
-    right: 5px;
-    color: #aaa;
-  }
+html {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  height: 100%;
+}
 
-  .app {
-    width: 100vw;
-    background-color: black;
-    display: flex;
-    justify-content: center;
-    align-items: center; 
-    flex-direction: column;
-    position: absolute;
-  }
+body {
+  overflow: hidden;
+  background-color: #000000;
+}
 
-  .timer {
-    color: #FFF;
-    margin-bottom: 10px;
-  }
+h1 {
+  font-size: 2rem;
+  letter-spacing: -1px;
+  position: absolute;
+  margin: 0;
+  top: -4px;
+  right: 5px;
 
-  button {
-    cursor: pointer;
-    width: 80px;
+  color: transparent;
+  text-shadow: 0 0 4px white;
+}
 
-    background: linear-gradient(to right, #FF5858, #CC2E5D);
-    color: #FFF;
-    border-radius: 8px;
-    transition: 0.4s;
-  }
+p {
+  position: absolute;
+  margin: 0;
+  top: 35px;
+  right: 5px;
+  color: #aaa;
+}
 
-  .play:hover {
-    box-shadow: inset 3px 3px rgba(0, 0, 0, 0.2);
-  }
+.app {
+  visibility: hidden;
+  background-color: inherit;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
 
-  .play {
-    margin-top: 5px;
-    width: 200px;
-  }
+.timer {
+  color: #FFF;
+  margin-bottom: 10px;
+}
 
+button {
+  cursor: pointer;
+  width: 80px;
+  background: linear-gradient(to right, #FF5858, #CC2E5D);
+  color: #FFF;
+  border-radius: 8px;
+  transition: 0.4s;
+}
+
+.play {
+  align-self: center;
+  margin-top: 5px;
+  width: 250px;
+}
+
+.play:hover {
+  box-shadow: inset 3px 3px rgba(0, 0, 0, 0.2);
+}

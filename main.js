@@ -10,8 +10,7 @@ let startBtn = document.getElementById('start');
 let stopBtn = document.getElementById('stop');
 let resetBtn = document.getElementById('reset');
 let timer_element = document.getElementById('timer');
-let playBtn = document.querySelector('.play');
-const app = document.querySelector('.app')
+let app = document.querySelector('.app')
 
 
 // game variables
@@ -23,38 +22,34 @@ const html = document.querySelector('html');
 
 const width = canvas.width = window.innerWidth;
 const height = canvas.height = window.innerHeight;
+let playBtn = document.querySelector('.play');
 
 let count = 0;
 
 // !!!!!!!!!!!!!!!!TIMER BLOCK!!!!!!!!!!!!!!!!
-
-startBtn.addEventListener('click', function () {
-    timer = setInterval(timerHandler, 1000);
-    resetBtn.disabled = true;
-});
 
 stopBtn.addEventListener('click', function () {
     timer = clearInterval(timer);
     resetBtn.disabled = false;
 });
 
-resetBtn.addEventListener('click', function() {
+resetBtn.addEventListener('click', function () {
     timer = clearInterval('timer');
     resetBtn.disabled = true;
     sec = 0;
-    min= 0;
+    min = 0;
     hour = 0;
     timer_element.innerHTML = '00 : 00 : 00';
 });
 
 function timerHandler() {
     sec++;
-    
-    if(sec ==60) {
+
+    if (sec === 60) {
         sec = 0;
         min++;
     }
-    if (min == 60) {
+    if (min === 60) {
         min = 0;
         hour++;
     }
@@ -114,7 +109,7 @@ Ball.prototype.draw = function () {
 }
 
 Ball.prototype.update = function () {
-    if ((this.x + this.size) >= width + this.size) {
+    if ((this.x + this.size) >= width) {
         this.velX = -(this.velX);
     }
 
@@ -122,11 +117,11 @@ Ball.prototype.update = function () {
         this.velX = -(this.velX);
     }
 
-    if ((this.y + this.size) >= height + this.size) {
+    if ((this.y + this.size) >= height) {
         this.velY = -(this.velY);
     }
 
-    if ((this.y + this.size) <= app.offsetHeight + this.size) {
+    if ((this.y + this.size) <= 0 + this.size) {
         this.velY = -(this.velY);
     }
 
@@ -168,19 +163,19 @@ EvilCircle.prototype.draw = function () {
 }
 
 EvilCircle.prototype.checkBounds = function () {
-    if ((this.x + this.size) >= width + this.size) {
+    if ((this.x + this.size) >= width) {
         this.x -= this.size;
     }
 
-    if ((this.x + this.size) <= 0 + this.size) {
+    if ((this.x + this.size) <= 0) {
         this.x += this.size;
     }
 
-    if ((this.y + this.size) >= height + this.size) {
+    if ((this.y + this.size) >= height) {
         this.y -= this.size;
     }
 
-    if ((this.y + this.size) <= app.offsetHeight + this.size) {
+    if ((this.y + this.size) <= app.offsetHeight) {
         this.y += this.size;
     }
 }
@@ -211,7 +206,7 @@ EvilCircle.prototype.collisionDetect = function () {
                 balls[j].exists = false;
                 count--;
                 para.textContent = 'Balls count: ' + count;
-                if(count === 0) {
+                if (count === 0) {
                     timer = clearInterval(timer);
                     resetBtn.disabled = false;
                 }
@@ -222,7 +217,7 @@ EvilCircle.prototype.collisionDetect = function () {
 
 let balls = [];
 
-while (balls.length < 10) {
+while (balls.length < 25) {
     let size = random(10, 20);
     let ball = new Ball(
         random(0 + size, width - size),
@@ -261,10 +256,10 @@ function loop() {
 
     requestAnimationFrame(loop);
 }
-playBtn.addEventListener('click', loop);
 
-
-/*canvas.onload = function() {
-    timerHandler();
-} */
-
+playBtn.addEventListener('click', function () {
+    app.style.visibility = 'visible';
+    playBtn.style.visibility = 'hidden';
+    loop();
+    timer = setInterval(timerHandler, 1000);
+});
